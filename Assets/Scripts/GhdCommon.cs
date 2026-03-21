@@ -55,7 +55,7 @@ namespace GhdCommon
         LEFT_HAND_RPM = 7,
         RIGHT_HAND_RPM = 8
     }
-    class Sensor
+    class MotorDataSet
     {
         public double extend_length;
         
@@ -70,7 +70,12 @@ namespace GhdCommon
         public Motor right_updown;
         public Motor right_hand;
 
-        public Sensor(std_msgs.msg.UInt8MultiArray left, std_msgs.msg.UInt8MultiArray right)
+        public MotorDataSet()
+        {
+            
+        }
+
+        public MotorDataSet(std_msgs.msg.UInt8MultiArray left, std_msgs.msg.UInt8MultiArray right)
         {
             short[] left_rpms = new short[8];
             short[] left_positions = new short[8];

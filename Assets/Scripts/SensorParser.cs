@@ -72,7 +72,7 @@ public class SensorParser : MonoBehaviour
     {
         if(left_mc_data != null && right_mc_data != null)
         {
-            GhdCommon.Sensor sensor_data = new GhdCommon.Sensor(left_mc_data, right_mc_data);
+            GhdCommon.MotorDataSet sensor_data = new GhdCommon.MotorDataSet(left_mc_data, right_mc_data);
 
             var wheel_msg = sensor_data.GetWheelSensorMsg();
             var machine_msg = sensor_data.GetMachineSensorMsg();
