@@ -13,7 +13,6 @@ public class ManualCmdManager : MonoBehaviour
     public string from_player_topic_name = "/from_player";
     public string wheel_cmd_topic = "/manual/wheel";
     public string machine_cmd_topic = "/manual/machine";
-    public string lock_cmd_topic = "/manual/lock";
 
     [Header("足回り設定")]
     public double max_linear_velocity = 2.6; // [m/s]
@@ -53,6 +52,7 @@ public class ManualCmdManager : MonoBehaviour
         right_vacuum_state = false;
         enable_extension = false;
         updown_value = 0;
+        hand_value = 0;
     }
 
     // Update is called once per frame
