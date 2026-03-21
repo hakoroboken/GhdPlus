@@ -70,14 +70,18 @@
     <Compile Include="Assets/Ros2ForUnity/Scripts/ROS2PerformanceTest.cs" />
     <Compile Include="Assets/Scripts/PlayerConnector.cs" />
     <Compile Include="Assets/Scripts/LockPID.cs" />
+    <Compile Include="Assets/Scripts/ManualCmdManager.cs" />
+    <Compile Include="Assets/Scripts/AutoCmdManager.cs" />
     <Compile Include="Assets/HKDT/Connection/FastSerial.cs" />
     <Compile Include="Assets/ROS2UnityComponent.cs" />
     <Compile Include="Assets/Ros2ForUnity/Scripts/ROS2UnityCore.cs" />
     <Compile Include="Assets/HKDT/Auto/Common/MathUtils.cs" />
     <Compile Include="Assets/HKDT/Connection/FastUdpServer.cs" />
     <Compile Include="Assets/Ros2ForUnity/Scripts/Transformations.cs" />
+    <Compile Include="Assets/Scripts/AutoCommon.cs" />
     <Compile Include="Assets/HKDT/Auto/Algorithm/SpatialHash.cs" />
     <Compile Include="Assets/HKDT/Auto/Example/PurePursuitExample.cs" />
+    <Compile Include="Assets/Scripts/TargetPacketCreator.cs" />
     <Compile Include="Assets/Ros2ForUnity/Scripts/ROS2ForUnity.cs" />
     <Compile Include="Assets/HKDT/Auto/Control/PID.cs" />
     <Compile Include="Assets/HKDT/Simulation/Robot/DifferentialDrive/DifferentialDriver.cs" />
@@ -89,6 +93,7 @@
     <Compile Include="Assets/HKDT/Auto/Example/PathCreateExample.cs" />
     <Compile Include="Assets/HKDT/Simulation/Robot/OmniData/Scripts/Robot.cs" />
     <Compile Include="Assets/Ros2ForUnity/Scripts/Sensor.cs" />
+    <Compile Include="Assets/Scripts/StatusVisualizer.cs" />
     <Compile Include="Assets/Ros2ForUnity/Scripts/Time/UnityTimeSource.cs" />
     <Compile Include="Assets/Ros2ForUnity/Scripts/ROS2TalkerExample.cs" />
     <Compile Include="Assets/HKDT/Auto/Planning/CubicSpline.cs" />
@@ -98,7 +103,6 @@
     <Compile Include="Assets/Ros2ForUnity/Scripts/Time/TimeUtils.cs" />
     <Compile Include="Assets/Scripts/SwervePID.cs" />
     <Compile Include="Assets/HKDT/Auto/Example/DiffDriveExample.cs" />
-    <Compile Include="Assets/Scripts/GhdCore.cs" />
     <Compile Include="Assets/Ros2ForUnity/Scripts/Time/ROS2ScalableTimeSource.cs" />
     <Compile Include="Assets/HKDT/Auto/Localization/IterativeClosestPoint.cs" />
     <Compile Include="Assets/HKDT/Auto/Sensing/HokuyoDriver.cs" />
@@ -111,6 +115,7 @@
     <Compile Include="Assets/Ros2ForUnity/Scripts/ROS2ClientExample.cs" />
     <Compile Include="Assets/HKDT/Auto/Control/PurePursuit.cs" />
     <Compile Include="Assets/HKDT/Auto/Example/IcpExample.cs" />
+    <Compile Include="Assets/Scripts/ModeManager.cs" />
     <Compile Include="Assets/Scripts/GhdCommon.cs" />
     <Compile Include="Assets/HKDT/Auto/Common/ScanUtils.cs" />
     <Compile Include="Assets/Ros2ForUnity/Scripts/PostInstall.cs" />
