@@ -68,8 +68,11 @@ public class ModeManager : MonoBehaviour
             }
             else
             {
-                target_wheel_publisher.Publish(manual_wheel);
-                target_machine_publisher.Publish(manual_machine);
+                if(manual_wheel != null)
+                {
+                    target_wheel_publisher.Publish(manual_wheel);
+                    target_machine_publisher.Publish(manual_machine);
+                }
             }
         }
     }
