@@ -56,6 +56,11 @@ namespace HKDT.Connection
             }
             catch(SocketException)
             {
+                var status_msg = new std_msgs.msg.Bool
+                {
+                    Data = false
+                };
+                statusPublisher.Publish(status_msg);
                 return false;
             }
         }
