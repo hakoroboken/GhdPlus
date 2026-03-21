@@ -16,8 +16,8 @@ public class ModeManager : MonoBehaviour
     public string manual_machine_topic = "/manual/machine";
     public string auto_wheel_topic = "/auto/wheel";
     [Header("パブリッシャーのトピック")]
-    public string pub_wheel_topic = "/target/wheel";
-    public string pub_machine_topic = "/target/machine";
+    public string pub_wheel_topic = "/wheel_cmd";
+    public string pub_machine_topic = "/machine_cmd";
 
     private ROS2Node node;
     private ISubscription<std_msgs.msg.UInt8> mode_subscriber;
