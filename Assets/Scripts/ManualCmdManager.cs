@@ -26,12 +26,11 @@ public class ManualCmdManager : MonoBehaviour
     private ROS2Node node;
     private ISubscription<std_msgs.msg.UInt8MultiArray> data_subscriber;
     private IPublisher<std_msgs.msg.Float64MultiArray> machine_target_cmd_publisher;
-    private IPublisher<std_msgs.msg.Bool> lock_cmd_publisher;
     private IPublisher<geometry_msgs.msg.Twist> wheel_target_cmd_publisher;
 
     // ロック機構
-    private int prev_lock_input;
-    private std_msgs.msg.Bool lock_cmd;
+    private int prev_extension_input;
+    private bool enable_extension;
 
     // 上昇機構
     private int updown_value;
@@ -47,15 +46,12 @@ public class ManualCmdManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        prev_lock_input = 0;
+        prev_extension_input = 0;
         prev_left_vacuum_input = 0;
         prev_right_vacuum_input = 0;
         left_vacuum_state = false;
         right_vacuum_state = false;
-        lock_cmd = new std_msgs.msg.Bool
-        {
-            Data = false
-        };
+        enable_extension = false;
         updown_value = 0;
     }
 
@@ -72,7 +68,6 @@ public class ManualCmdManager : MonoBehaviour
 
                 machine_target_cmd_publisher = node.CreatePublisher<std_msgs.msg.Float64MultiArray>(machine_cmd_topic);
                 wheel_target_cmd_publisher = node.CreatePublisher<geometry_msgs.msg.Twist>(wheel_cmd_topic);
-                lock_cmd_publisher = node.CreatePublisher<std_msgs.msg.Bool>(lock_cmd_topic);
             }
         }
     }
@@ -81,20 +76,33 @@ public class ManualCmdManager : MonoBehaviour
     {
         var twist_msg = CreateManualWheelMsg(msg.Data);
         var machine_msg = CreateManualMachineMsg(msg.Data);
-        var lock_msg = CreateLockMsg(msg.Data);
 
         wheel_target_cmd_publisher.Publish(twist_msg);
         machine_target_cmd_publisher.Publish(machine_msg);
-        lock_cmd_publisher.Publish(lock_msg);
     }
 
     private geometry_msgs.msg.Twist CreateManualWheelMsg(byte[] data)
     {
+        int square = (data[4] >> 5) & 1;
+
+        // コントローラー入力に変化があるとき
+        if(square != prev_extension_input)
+        {
+            // さらに押されていたら
+            if(square == 1)
+            {
+                enable_extension = !enable_extension;
+            }
+        }
+        prev_extension_input = square;
+
         var twist_msg = new geometry_msgs.msg.Twist();
 
         twist_msg.Linear.X = max_linear_velocity * byte2double(data[0]);
         twist_msg.Linear.Y = max_linear_velocity * byte2double(data[1]);
         twist_msg.Angular.Z = -1.0* max_angular_velocity * byte2double(data[2]);
+
+        twist_msg.Linear.Z = enable_extension ? 0.8 : 0.0; // trueのとき展開する。falseのときは0にする。
 
         return twist_msg;
     }
@@ -189,25 +197,6 @@ public class ManualCmdManager : MonoBehaviour
         machine_msg.Data = machine_data;
 
         return machine_msg;
-    }
-
-    private std_msgs.msg.Bool CreateLockMsg(byte[] data)
-    {
-        int square = (data[4] >> 5) & 1;
-
-        // コントローラー入力に変化があるとき
-        if(square != prev_lock_input)
-        {
-            // さらに押されていたら
-            if(square == 1)
-            {
-                //ロック状態を反転
-                lock_cmd.Data = !lock_cmd.Data;
-            }
-        }
-        prev_lock_input = square;
-
-        return lock_cmd;
     }
 
     private double byte2double(byte b)
