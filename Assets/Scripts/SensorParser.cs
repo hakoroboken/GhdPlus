@@ -70,15 +70,18 @@ public class SensorParser : MonoBehaviour
 
     private void PublishThread()
     {
-        if(left_mc_data != null && right_mc_data != null)
+        while(true)
         {
-            GhdCommon.MotorDataSet sensor_data = new GhdCommon.MotorDataSet(left_mc_data, right_mc_data);
+            if(left_mc_data != null && right_mc_data != null)
+            {
+                GhdCommon.MotorDataSet sensor_data = new GhdCommon.MotorDataSet(left_mc_data, right_mc_data);
 
-            var wheel_msg = sensor_data.GetWheelSensorMsg();
-            var machine_msg = sensor_data.GetMachineSensorMsg();
+                var wheel_msg = sensor_data.GetWheelSensorMsg();
+                var machine_msg = sensor_data.GetMachineSensorMsg();
 
-            wheel_sensor_publisher.Publish(wheel_msg);
-            machine_sensor_publisher.Publish(machine_msg);
+                wheel_sensor_publisher.Publish(wheel_msg);
+                machine_sensor_publisher.Publish(machine_msg);
+            }
         }
     }
 }
